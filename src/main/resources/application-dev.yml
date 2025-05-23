@@ -1,8 +1,14 @@
 spring:
+  profiles:
+    active: dev
+
+  main:
+    allow-bean-definition-overriding: true
+
   datasource:
     url: jdbc:postgresql://localhost:5432/matchingenginedb
     username: postgres
-    password: password
+    password: root@root
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
