@@ -39,6 +39,11 @@ public class PriceTimeMatchingEngine implements MatchingEngine {
                 : orderBookService.getBuyOrders(symbol);
 
         synchronized (oppositeQueue) {
+            log.info("Incoming Order: {}", incomingOrder);
+            log.info("Order Type: {}", incomingOrder.getType());
+            log.info("Looking for Opposite Orders: {}", oppositeQueue.size());
+            oppositeQueue.forEach(order -> log.info(" → Opposite Order: {}", order));
+
             while (incomingOrder.getQuantity() > 0 && !oppositeQueue.isEmpty()) {
                 Order topOrder = oppositeQueue.peek();
                 if (topOrder == null) break;

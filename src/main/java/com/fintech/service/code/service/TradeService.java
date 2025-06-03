@@ -25,4 +25,19 @@ public class TradeService {
         return tradeRepository.save(trade);
     }
 
+    public Double getLastTradedPrice(String symbol) {
+        return tradeRepository.findTopBySymbolOrderByTimestampDesc(symbol)
+                .map(Trade::getPrice)
+                .orElse(null);
+    }
+
+    public Double getAveragePrice(String symbol, int lastN) {
+        var trades = tradeRepository.findTopNBySymbolOrderByTimestampDesc(symbol, lastN);
+        return trades.stream()
+                .mapToDouble(Trade::getPrice)
+                .average()
+                .orElse(0.0);
+    }
+
+
 }

@@ -18,6 +18,7 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final MatchingEngine matchingEngine;
+    private final OrderBookService orderBookService;
 
     @Transactional
     public List<Trade> placeOrder(OrderRequest request) {
