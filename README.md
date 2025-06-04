@@ -1,6 +1,6 @@
 # 📈 Stock Exchange Platform – Project Overview
 
-A real-time, intelligent stock trading platform using a **microservice architecture**. It allows buyers and sellers to place orders, automatically matches them, executes payments, and provides analytics-based price recommendations via integrated services.
+A real-time, intelligent stock trading platform using a **Spring Boot microservice architecture**. It allows buyers and sellers to place orders, automatically matches them, executes payments, and provides analytics-based price recommendations via integrated services.
 
 ---
 
@@ -129,7 +129,7 @@ Use independent schema per service or isolated database instances.
 
 ---
 
-## 📦 Project Structure (StockExchangeService)
+## 📦 Backend Structure (StockExchangeService)
 stock-exchange-platform/
 ├── src/
 │ ├── main/java/com/example/engine/
@@ -160,10 +160,75 @@ stock-exchange-platform/
 
 ---
 
-## 🚀 Future Enhancements
+## Fontend side
+### Frontend Structure (stock-exchange-ui)
+stock-exchange-ui/
+├── src/
+│   ├── app/
+│   │   ├── core/                      # Core modules and services (singleton)
+│   │   │   ├── auth/                 # JWT auth, login, registration
+│   │   │   │   ├── auth.service.ts
+│   │   │   │   ├── auth.guard.ts
+│   │   │   │   ├── jwt.interceptor.ts
+│   │   │   │   ├── role.guard.ts
+│   │   │   │   └── token-storage.service.ts
+│   │   │   ├── services/             # Shared singleton services
+│   │   │   │   ├── websocket.service.ts
+│   │   │   │   └── notification.service.ts
+│   │   │   └── core.module.ts
+│   │
+│   │   ├── shared/                   # Shared components, pipes, and directives
+│   │   │   ├── components/
+│   │   │   ├── pipes/
+│   │   │   └── shared.module.ts
+│   │
+│   │   ├── features/                 # Feature modules (organized by business domain)
+│   │   │   ├── auth/                # Login/Register pages
+│   │   │   │   ├── login/
+│   │   │   │   ├── register/
+│   │   │   │   └── auth.module.ts
+│   │   │   ├── dashboard/          # Home and user dashboards
+│   │   │   │   ├── buyer-dashboard/
+│   │   │   │   ├── seller-dashboard/
+│   │   │   │   └── dashboard.module.ts
+│   │   │   ├── order-book/         # Order book view and submission
+│   │   │   │   ├── place-order/
+│   │   │   │   ├── live-order-book/
+│   │   │   │   └── order-book.module.ts
+│   │   │   ├── trade-history/      # View completed trades
+│   │   │   │   ├── trade-history.component.ts
+│   │   │   │   └── trade-history.module.ts
+│   │   │   ├── assistant/          # Assistant recommendations
+│   │   │   │   ├── assistant.component.ts
+│   │   │   │   └── assistant.module.ts
+│   │   │   ├── admin/              # Admin pages (optional)
+│   │   │   │   └── user-management/
+│   │   │   │       ├── user-list.component.ts
+│   │   │   │       └── role-editor.component.ts
+│   │   │   └── ...
+│   │
+│   │   ├── app-routing.module.ts
+│   │   ├── app.component.ts
+│   │   └── app.module.ts
+│   │
+│   ├── assets/                     # Static assets like logos and images
+│   ├── environments/               # `environment.ts` and `environment.prod.ts`
+│   └── index.html
+│
+├── angular.json
+├── package.json
+└── tsconfig.json
 
-- 🔐 JWT-based user authentication
-- 💼 User wallet and portfolio management
-- 🧪 Market simulation and replay
+### 🧠 Feature Module Descriptions
+- **auth:** Handles user authentication (login/register), role guard, JWT storage
+- **dashboard:** User dashboards (BUYER, SELLER, ADMIN views)
+- **order-book:** Submit/view live order book (with real-time updates)
+- **trade-history:** Displays a list of completed trades
+- **User Assistant** Shows price recommendations and market analysis
+- **admin:** Admin interface for managing users and roles
 
-
+### 🔌 WebSocket & Real-Time Integration
+- WebSocketService in core/services to connect to Spring WebSocket endpoint
+- Emit and listen for:
+  - Trade updates
+  - Order book changes
