@@ -1,6 +1,6 @@
 # 📈 Stock Exchange Platform – Project Overview
 
-A real-time, intelligent stock trading platform using a **Spring Boot microservice architecture**. It allows buyers and sellers to place orders, automatically matches them, executes payments, and provides analytics-based price recommendations via integrated services.
+A real-time, intelligent stock trading platform. It allows buyers and sellers to place orders, automatically matches them, executes payments, and provides analytics-based price recommendations via integrated services.
 
 ---
 
